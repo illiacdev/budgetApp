@@ -1,8 +1,8 @@
-__pycache__/
-.pytest_cache/
-.coverage
-htmlcov/
 .venv/
+.coverage
+.pytest_cache/
+__pycache__/
+htmlcov/
 dist/
 build/
 *.pyc

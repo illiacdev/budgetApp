@@ -1,4 +1,6 @@
-fastapi
-uvicorn
-jinja2
+pytest
+pytest-cov
+radon
+xenon
+flake8
 

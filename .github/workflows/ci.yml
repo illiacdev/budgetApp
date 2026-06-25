@@ -2,22 +2,40 @@ name: ci
 
 on:
   push:
-    branches: [main, develop]
+    branches:
+      - main
   pull_request:
-    branches: [main, develop]
+    branches:
+      - main
 
 jobs:
   test:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
-      - run: python -m pip install --upgrade pip
-      - run: python -m pip install pytest pytest-cov ruff radon xenon
-      - run: pytest
-      - run: ruff check .
-      - run: radon cc -s -a app
-      - run: xenon --max-absolute B --max-average A app
+          python-version: "3.9"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run tests with coverage
+        run: |
+          pytest --cov=budget --cov-branch --cov-report=term-missing --cov-fail-under=100
+
+      - name: Check cyclomatic complexity
+        run: |
+          radon cc -s budget
+          xenon --max-absolute B --max-average B budget
+
+      - name: Run style checks
+        run: |
+          flake8 budget tests
 
