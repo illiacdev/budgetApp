@@ -1,0 +1,2 @@
+"""Budget web application package."""
+
