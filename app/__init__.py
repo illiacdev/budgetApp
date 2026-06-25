@@ -1,2 +1,1 @@
 """Budget web application package."""
-

@@ -634,7 +634,9 @@ def test_load_transactions_from_csv_reads_step1_sample() -> None:
         "amount": 25000,
         "memo": "중고마켓",
     }
-    assert all(isinstance(transaction["amount"], int) for transaction in transactions)
+    assert all(
+        isinstance(transaction["amount"], int) for transaction in transactions
+    )
 
 
 def test_monthly_summary_groups_income_expense_and_net() -> None:

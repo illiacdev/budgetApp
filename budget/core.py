@@ -1,12 +1,12 @@
-"""Core transaction handling for the budget CLI app."""
-
+from collections.abc import Sequence
 import csv
 from pathlib import Path
-from collections.abc import Sequence
 from typing import Union
 
 
-def add_transaction(transactions: Sequence[dict], transaction: dict) -> list[dict]:
+def add_transaction(
+    transactions: Sequence[dict], transaction: dict
+) -> list[dict]:
     """Add a transaction to the transaction list and return a new list."""
 
     return [*transactions, transaction]
@@ -21,7 +21,9 @@ def get_balance(transactions: Sequence[dict]) -> float:
     return float(sum(transaction["amount"] for transaction in transactions))
 
 
-def filter_by_category(transactions: Sequence[dict], category: str) -> list[dict]:
+def filter_by_category(
+    transactions: Sequence[dict], category: str
+) -> list[dict]:
     """Return transactions whose category matches the given category."""
 
     return [
